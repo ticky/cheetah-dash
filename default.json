@@ -1,0 +1,57 @@
+{
+	"theme": "light",
+	"font": "Chicago-12",
+	"rotation": 90,
+	"led_colour": "0x7b0084",
+	"led_brightness": 0.2,
+
+	"controls": {
+		"dial": {
+			"press": {
+				"write": "r",
+				"label": "Radio Menu"
+			},
+			"clockwise": {
+				"keycode": "PAGE_DOWN",
+				"label": "Radio Next"
+			},
+			"counter_clockwise": {
+				"keycode": "PAGE_UP",
+				"label": "Radio Previous"
+			}
+		},
+		"key": [
+			{
+				"keycode": "F5",
+				"label": "Navigation / Zoom"
+			},
+			{
+				"keycode": "F6",
+				"label": "Current Job"
+			},
+			{
+				"keycode": "F7",
+				"label": "Diagnostics & Call"
+			},
+			{
+				"keycode": "F8",
+				"label": "Messages"
+			},
+			{
+				"write": "e",
+				"label": "Engine Start"
+			},
+			{
+				"write": "t",
+				"label": "Trailer Coupling"
+			},
+			{
+				"keycode": "ENTER"
+			},
+			{
+				"keycode": "ESCAPE",
+				"label": "ESC"
+			}
+		]
+	}
+}
