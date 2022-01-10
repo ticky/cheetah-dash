@@ -9,6 +9,7 @@ import terminalio
 from adafruit_bitmap_font import bitmap_font
 # https://circuitpython.readthedocs.io/projects/display-shapes/
 from adafruit_display_shapes import rect
+from adafruit_display_text import wrap_text_to_pixels
 import adafruit_display_text.bitmap_label as label
 from adafruit_displayio_layout.layouts.grid_layout import GridLayout
 # https://circuitpython.readthedocs.io/projects/hid/
@@ -207,7 +208,7 @@ print("[%.2f] Font loaded" % (time.monotonic() - start))
 #       Maybe make an automatically word-wrapping label class?
 label_a = label.Label(font=font,
                       # text="...hi :^)\n{}".format(time.monotonic()),
-                      text="Navigation\n/ Zoom",
+                      text="\n".join(wrap_text_to_pixels("Navigation / Zoom", 74, font)),
                       color=0x333333,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
@@ -219,7 +220,7 @@ layout.add_content_for(KeyLayout.KEY_A0, label_a)
 print("[%.2f] Label A added to group" % (time.monotonic() - start))
 
 label_b = label.Label(font=font,
-                      text="Current\nJob",
+                      text="\n".join(wrap_text_to_pixels("Current Job", 74, font)),
                       color=0x333333,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
@@ -231,7 +232,7 @@ layout.add_content_for(KeyLayout.KEY_A1, label_b)
 print("[%.2f] Label B added to group" % (time.monotonic() - start))
 
 label_c = label.Label(font=font,
-                      text="Diagnostics\n& Call",
+                      text="\n".join(wrap_text_to_pixels("Diagnostics & Call", 74, font)),
                       color=0x333333,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
@@ -239,7 +240,7 @@ label_c = label.Label(font=font,
 layout.add_content_for(KeyLayout.KEY_A2, label_c)
 
 label_d = label.Label(font=font,
-                      text="Messages",
+                      text="\n".join(wrap_text_to_pixels("Messages", 74, font)),
                       color=0x222222,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
@@ -247,7 +248,7 @@ label_d = label.Label(font=font,
 layout.add_content_for(KeyLayout.KEY_A3, label_d)
 
 label_dial_clockwise = label.Label(font=font,
-                                   text="Radio\nNext",
+                                   text="\n".join(wrap_text_to_pixels("Radio Next", 74, font)),
                                    color=0x333333,
                                    anchor_point=(0.5, 0.5),
                                    base_alignment=True)
@@ -256,7 +257,7 @@ layout.add_content_for(KeyLayout.DIAL_CLOCKWISE,
                        label_dial_clockwise)
 
 label_dial_press = label.Label(font=font,
-                               text="Radio\nMenu",
+                               text="\n".join(wrap_text_to_pixels("Radio Menu", 74, font)),
                                color=0x333333,
                                anchor_point=(0.5, 0.5),
                                base_alignment=True)
@@ -265,7 +266,7 @@ layout.add_content_for(KeyLayout.DIAL_PRESS,
                        label_dial_press)
 
 label_dial_counterclockwise = label.Label(font=font,
-                                          text="Radio\nPrevious",
+                                          text="\n".join(wrap_text_to_pixels("Radio Previous", 74, font)),
                                           color=0x333333,
                                           anchor_point=(0.5, 0.5),
                                           base_alignment=True)
@@ -283,7 +284,7 @@ label_empty = label.Label(font=font,
 layout.add_content_for((0, 1), label_empty)
 
 label_w = label.Label(font=font,
-                      text="ESC",
+                      text="\n".join(wrap_text_to_pixels("ESC", 74, font)),
                       color=0x333333,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
@@ -291,7 +292,7 @@ label_w = label.Label(font=font,
 layout.add_content_for(KeyLayout.KEY_B0, label_w)
 
 label_x = label.Label(font=font,
-                      text="Enter",
+                      text="\n".join(wrap_text_to_pixels("Enter", 74, font)),
                       color=0x333333,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
@@ -299,7 +300,7 @@ label_x = label.Label(font=font,
 layout.add_content_for(KeyLayout.KEY_B1, label_x)
 
 label_y = label.Label(font=font,
-                      text="Trailer\nCoupling",
+                      text="\n".join(wrap_text_to_pixels("Trailer Coupling", 74, font)),
                       color=0x333333,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
@@ -307,7 +308,7 @@ label_y = label.Label(font=font,
 layout.add_content_for(KeyLayout.KEY_B2, label_y)
 
 label_z = label.Label(font=font,
-                      text="Engine\nStart",
+                      text="\n".join(wrap_text_to_pixels("Engine Start-Stop", 74, font)),
                       color=0x222222,
                       anchor_point=(0.5, 0.5),
                       base_alignment=True)
