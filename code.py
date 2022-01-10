@@ -204,14 +204,17 @@ except OSError:
 
 print("[%.2f] Font loaded" % (time.monotonic() - start))
 
-# TODO: Word wrap https://circuitpython.readthedocs.io/projects/display_text/en/latest/examples.html#wrap-pixel-test
-#       Maybe make an automatically word-wrapping label class?
-label_a = label.Label(font=font,
-                      # text="...hi :^)\n{}".format(time.monotonic()),
-                      text="\n".join(wrap_text_to_pixels("Navigation / Zoom", 74, font)),
-                      color=0x333333,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+# Label class which automatically word wraps to the given max_width value
+class NicerLabel(label.Label):
+    def __init__(self, font: Union[BuiltinFont, BDF, PCF], max_width: int, text: str = "", indent0: str = "", indent1: str = "", **kwargs) -> None:
+        super().__init__(font=font, text="\n".join(wrap_text_to_pixels(text, max_width, font, indent0=indent0, indent1=indent1)), **kwargs)
+
+label_a = NicerLabel(font=font,
+                     text="Navigation / Zoom",
+                     max_width=74,
+                     color=0x333333,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 print("[%.2f] Label A created" % (time.monotonic() - start))
 
@@ -219,11 +222,12 @@ layout.add_content_for(KeyLayout.KEY_A0, label_a)
 
 print("[%.2f] Label A added to group" % (time.monotonic() - start))
 
-label_b = label.Label(font=font,
-                      text="\n".join(wrap_text_to_pixels("Current Job", 74, font)),
-                      color=0x333333,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+label_b = NicerLabel(font=font,
+                     text="Current Job",
+                     max_width=74,
+                     color=0x333333,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 print("[%.2f] Label B created" % (time.monotonic() - start))
 
@@ -231,87 +235,97 @@ layout.add_content_for(KeyLayout.KEY_A1, label_b)
 
 print("[%.2f] Label B added to group" % (time.monotonic() - start))
 
-label_c = label.Label(font=font,
-                      text="\n".join(wrap_text_to_pixels("Diagnostics & Call", 74, font)),
-                      color=0x333333,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+label_c = NicerLabel(font=font,
+                     text="Diagnostics & Call",
+                     max_width=74,
+                     color=0x333333,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 layout.add_content_for(KeyLayout.KEY_A2, label_c)
 
-label_d = label.Label(font=font,
-                      text="\n".join(wrap_text_to_pixels("Messages", 74, font)),
-                      color=0x222222,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+label_d = NicerLabel(font=font,
+                     text="Messages",
+                     max_width=74,
+                     color=0x222222,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 layout.add_content_for(KeyLayout.KEY_A3, label_d)
 
-label_dial_clockwise = label.Label(font=font,
-                                   text="\n".join(wrap_text_to_pixels("Radio Next", 74, font)),
-                                   color=0x333333,
-                                   anchor_point=(0.5, 0.5),
-                                   base_alignment=True)
+label_dial_clockwise = NicerLabel(font=font,
+                                  text="Radio Next",
+                                  max_width=74,
+                                  color=0x333333,
+                                  anchor_point=(0.5, 0.5),
+                                  base_alignment=True)
 
 layout.add_content_for(KeyLayout.DIAL_CLOCKWISE,
                        label_dial_clockwise)
 
-label_dial_press = label.Label(font=font,
-                               text="\n".join(wrap_text_to_pixels("Radio Menu", 74, font)),
-                               color=0x333333,
-                               anchor_point=(0.5, 0.5),
-                               base_alignment=True)
+label_dial_press = NicerLabel(font=font,
+                              text="Radio Menu",
+                              max_width=74,
+                              color=0x333333,
+                              anchor_point=(0.5, 0.5),
+                              base_alignment=True)
 
 layout.add_content_for(KeyLayout.DIAL_PRESS,
                        label_dial_press)
 
-label_dial_counterclockwise = label.Label(font=font,
-                                          text="\n".join(wrap_text_to_pixels("Radio Previous", 74, font)),
-                                          color=0x333333,
-                                          anchor_point=(0.5, 0.5),
-                                          base_alignment=True)
+label_dial_counterclockwise = NicerLabel(font=font,
+                                         text="Radio Previous",
+                                         max_width=74,
+                                         color=0x333333,
+                                         anchor_point=(0.5, 0.5),
+                                         base_alignment=True)
 
 layout.add_content_for(KeyLayout.DIAL_COUNTERCLOCKWISE,
                        label_dial_counterclockwise)
 
-label_empty = label.Label(font=font,
-                          text="",
-                          color=0x333333,
-                          anchor_point=(0.5, 0.5),
-                          base_alignment=True)
+label_empty = NicerLabel(font=font,
+                         text="...hi :^)\n{}".format(time.monotonic()),
+                         max_width=74,
+                         color=0x333333,
+                         anchor_point=(0.5, 0.5),
+                         base_alignment=True)
 
 # TODO: Automatically ensure unpopulated cells are drawn anyway
 layout.add_content_for((0, 1), label_empty)
 
-label_w = label.Label(font=font,
-                      text="\n".join(wrap_text_to_pixels("ESC", 74, font)),
-                      color=0x333333,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+label_w = NicerLabel(font=font,
+                     text="ESC",
+                     max_width=74,
+                     color=0x333333,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 layout.add_content_for(KeyLayout.KEY_B0, label_w)
 
-label_x = label.Label(font=font,
-                      text="\n".join(wrap_text_to_pixels("Enter", 74, font)),
-                      color=0x333333,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+label_x = NicerLabel(font=font,
+                     text="Enter",
+                     max_width=74,
+                     color=0x333333,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 layout.add_content_for(KeyLayout.KEY_B1, label_x)
 
-label_y = label.Label(font=font,
-                      text="\n".join(wrap_text_to_pixels("Trailer Coupling", 74, font)),
-                      color=0x333333,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+label_y = NicerLabel(font=font,
+                     text="Trailer Coupling",
+                     max_width=74,
+                     color=0x333333,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 layout.add_content_for(KeyLayout.KEY_B2, label_y)
 
-label_z = label.Label(font=font,
-                      text="\n".join(wrap_text_to_pixels("Engine Start-Stop", 74, font)),
-                      color=0x222222,
-                      anchor_point=(0.5, 0.5),
-                      base_alignment=True)
+label_z = NicerLabel(font=font,
+                     text="Engine Start-Stop",
+                     max_width=74,
+                     color=0x222222,
+                     anchor_point=(0.5, 0.5),
+                     base_alignment=True)
 
 layout.add_content_for(KeyLayout.KEY_B3, label_z)
 
