@@ -17,8 +17,6 @@ from adafruit_hid.consumer_control import ConsumerControl
 from adafruit_hid.consumer_control_code import ConsumerControlCode
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
-# https://docs.python.org/3/library/functions.html#getattr
-# getattr(Keycode, "CAPS_LOCK") == Keycode.CAPS_LOCK
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.mouse import Mouse
 import adafruit_il0373
